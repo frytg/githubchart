@@ -1,35 +1,51 @@
-GithubChart
-============
+# GitHubChart (The Rusty Version)
 
-[![Crate Version](https://img.shields.io/crates/v/githubchart.svg)](https://crates.io/crates/githubchart)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/akerl/githubchart/build.yml?branch=main)](https://github.com/akerl/githubchart/actions)
-[![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
+Generates an SVG of your GitHub contributions:
 
-Generates an SVG of your Github contributions:
+![Example image](./assets/frytg.svg)
 
-![Example image](http://akerl.github.io/githubchart/chart.svg)
+## Fork
 
-![Other user example](http://akerl.github.io/githubchart/other_user.svg)
+This is forked from [githubchart](https://github.com/akerl/githubchart) and ported from Ruby to Rust. It does not provide 100% of the same functionality, but it does generate a similar SVG.
 
-## Usage
+## Usage with `cargo`
 
-Run `githubchart path/to/svg` to generate an SVG. To override the default username (pulled from your local shell or .gitconfig), use `githubchart -u username path/to/svg`
+If you have Rust installed and are familiar with cargo, you can install and run this directly:
 
-GithubChart also allows you to provide input from a file instead of pulling data from Github. You can pass JSON to GithubChart by using `githubchart -i /path/to/file /path/to/svg`, or use '-' to use STDIN. See spec/examples/input.json for example data.
+```sh
+cargo run -- output.svg -u frytg
+```
 
-If you don't provide a file path, the resulting SVG will be printed to stdout.
+This compiles and runs the program directly (using dev profile and debug symbols). This would also be the command when developing locally.
 
-To modify the color scheme used, you can provide `-c SCHEME`. For example, `githubchart -c halloween` uses GitHub's halloween colors. Use `-s` to list the available schemes.
+To modify the color scheme used, you can provide `-c SCHEME`. For example, `cargo run -- output.svg -u frytg -c halloween` uses GitHub's halloween colors.
 
-### Hosted SVG
+Use `cargo fmt` to format the code.
 
-A hosted service for loading these SVGs was made by [2016rshah](https://github.com/2016rshah): http://ghchart.rshah.org/ ([source code](https://github.com/2016rshah/githubchart-api))
+## Usage with binary
 
-## Installation
+Alternatively, you can download a release binary from the [releases page](https://github.com/frytg/githubchart-rust/releases) and run it directly:
 
-    cargo install githubchart
+```sh
+./githubchart output.svg -u frytg
+```
+
+## Build
+
+You can build a release binary with:
+
+```sh
+cargo build --release
+```
+
+[`Cargo.toml`](./Cargo.toml) is configured to optimize for size.
+
+Test the binary with:
+
+```sh
+./target/release/githubchart release.svg -u frytg
+```
 
 ## License
 
-githubchart is released under the MIT License. See the bundled LICENSE file for details.
-
+This `githubchart-rust` fork (like the upstream repo) is released under the MIT License. See the bundled [LICENSE](./LICENSE) file for details.

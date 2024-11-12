@@ -5,7 +5,10 @@ fn test_new_chart() {
     let stats = vec![("2023-07-18".to_string(), 5)];
     let chart = Chart::new(stats.clone(), None);
     assert_eq!(chart.stats, stats);
-    assert_eq!(chart.colors, vec!["#eeeeee", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]);
+    assert_eq!(
+        chart.colors,
+        vec!["#eeeeee", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]
+    );
 }
 
 #[test]
@@ -33,5 +36,8 @@ fn test_color_schemes() {
     assert_eq!(chart.colors, vec!["#FF0000", "#00FF00", "#0000FF"]);
 
     let chart_default = Chart::new(stats, None);
-    assert_eq!(chart_default.colors, vec!["#eeeeee", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]);
+    assert_eq!(
+        chart_default.colors,
+        vec!["#eeeeee", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]
+    );
 }
