@@ -89,3 +89,6 @@ pub fn fetch_github_stats(
 
     Ok(stats)
 }
+
+#[cfg(test)]
+mod tests;

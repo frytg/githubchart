@@ -20,7 +20,7 @@ This compiles and runs the program directly (using dev profile and debug symbols
 
 To modify the color scheme used, you can provide `-c SCHEME`. For example, `cargo run -- output.svg -u frytg -c halloween` uses GitHub's halloween colors.
 
-Use `cargo fmt` to format the code.
+Use `cargo fmt` to format the code and `cargo test` to run the tests.
 
 ## Usage with binary
 
