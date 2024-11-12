@@ -3,3 +3,5 @@ coverage/
 .coveralls.yml
 .bundle
 Gemfile.lock
+target/
+Cargo.lock

@@ -1,7 +1,7 @@
 GithubChart
 ============
 
-[![Gem Version](https://img.shields.io/gem/v/githubchart.svg)](https://rubygems.org/gems/githubchart)
+[![Crate Version](https://img.shields.io/crates/v/githubchart.svg)](https://crates.io/crates/githubchart)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/akerl/githubchart/build.yml?branch=main)](https://github.com/akerl/githubchart/actions)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
 
@@ -27,7 +27,7 @@ A hosted service for loading these SVGs was made by [2016rshah](https://github.c
 
 ## Installation
 
-    gem install githubchart
+    cargo install githubchart
 
 ## License
 
