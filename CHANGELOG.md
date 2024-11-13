@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.1.3 / 2024-11-13
+
+- feat: add Deno build to WASM
+
 ## 5.1.0 / 2024-11-13
 
 - feat: add WASM build

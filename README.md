@@ -56,6 +56,20 @@ This project is already configured to build for Web with `wasm-pack`. Run this c
 wasm-pack build --target web
 ```
 
+or [specifically for Deno](https://rustwasm.github.io/docs/wasm-bindgen/reference/deployment.html#deno):
+
+```sh
+wasm-pack build --target deno --out-dir pkg-deno
+```
+
+or a combined version for both:
+
+```sh
+rm -rf pkg && wasm-pack build --target deno --out-name githubchart_rust_deno && wasm-pack build --target web && rm pkg/.gitignore
+```
+
+For the combined version, you will need to remove `files` from [`pkg/package.json`](./pkg/package.json) to publish all files (web+deno) to NPM.
+
 There's also an example in [`web/example.html`](./web/example.html) that you can run locally.
 
 More docs about this:
