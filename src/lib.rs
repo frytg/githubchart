@@ -1,5 +1,6 @@
 use reqwest;
 use scraper::{Html, Selector};
+use wasm_bindgen::prelude::*;
 
 pub mod svg;
 
@@ -37,20 +38,18 @@ pub const COLOR_SCHEMES: &[(&str, &[&str])] = &[
     ),
 ];
 
-pub fn fetch_github_stats(
+pub async fn fetch_github_stats(
     username: &str,
 ) -> Result<Vec<(String, i32)>, Box<dyn std::error::Error>> {
-    // GitHub's contribution graph data endpoint
     let url = format!("https://github.com/users/{}/contributions", username);
 
-    // Fetch the HTML content
-    let client = reqwest::blocking::Client::new();
+    let client = reqwest::Client::new();
     let response = client
         .get(&url)
         .header("User-Agent", "githubchart-rust")
-        .send()?;
+        .send()
+        .await?;
 
-    // Check status code
     if !response.status().is_success() {
         return Err(format!(
             "Failed loading data from GitHub: {} {}",
@@ -60,10 +59,8 @@ pub fn fetch_github_stats(
         .into());
     }
 
-    let html_content = response.text()?;
+    let html_content = response.text().await?;
     let document = Html::parse_document(&html_content);
-
-    // Select contribution calendar cells
     let cell_selector = Selector::parse("td.ContributionCalendar-day").unwrap();
 
     let mut stats = Vec::new();
@@ -74,13 +71,11 @@ pub fn fetch_github_stats(
             element.value().attr("data-level"),
         ) {
             if let Ok(count) = count_str.parse::<i32>() {
-                // println!("fetch_github_stats > date: {}, count: {}", date, count);
                 stats.push((date.to_string(), count));
             }
         }
     }
 
-    // Sort by date
     stats.sort_by(|a, b| a.0.cmp(&b.0));
 
     if stats.is_empty() {
@@ -92,3 +87,21 @@ pub fn fetch_github_stats(
 
 #[cfg(test)]
 mod tests;
+
+#[wasm_bindgen]
+pub async fn generate_github_chart(username: &str, color_scheme: Option<String>) -> Result<String, JsValue> {
+    let stats = fetch_github_stats(username)
+        .await
+        .map_err(|e| JsValue::from_str(&e.to_string()))?;
+    
+    let colors = match color_scheme.as_deref() {
+        Some(scheme) => COLOR_SCHEMES
+            .iter()
+            .find(|&&(name, _)| name == scheme)
+            .map(|&(_, colors)| colors.to_vec()),
+        None => None,
+    };
+
+    let chart = Chart::new(stats, colors);
+    chart.render().map_err(|e| JsValue::from_str(&e))
+}

@@ -46,6 +46,23 @@ Test the binary with:
 ./target/release/githubchart release.svg -u frytg
 ```
 
+## Build for Web
+
+See [_Compiling from Rust to WebAssembly_](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_Wasm) for a full guide on compiling Rust to WebAssembly (WASM).
+
+This project is already configured to build for Web with `wasm-pack`. Run this command to build:
+
+```sh
+wasm-pack build --target web
+```
+
+There's also an example in [`web/example.html`](./web/example.html) that you can run locally.
+
+More docs about this:
+
+- [WebAssembly in Deno](https://docs.deno.com/runtime/reference/wasm/)
+- [`wasm-pack` docs](https://rustwasm.github.io/docs/wasm-pack/)
+
 ## License
 
-This `githubchart-rust` fork (like the upstream repo) is released under the MIT License. See the bundled [LICENSE](./LICENSE) file for details.
+This `githubchart-rust` fork (like the upstream repository) is released under the MIT License. See the bundled [LICENSE](./LICENSE) file for details.

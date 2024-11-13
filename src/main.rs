@@ -3,9 +3,10 @@ use std::fs::File;
 use std::io::{self, Write};
 use std::path::Path;
 
-use githubchart::{fetch_github_stats, Chart, COLOR_SCHEMES};
+use githubchart_rust::{fetch_github_stats, Chart, COLOR_SCHEMES};
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
         eprintln!(
@@ -49,8 +50,7 @@ fn main() {
     }
 
     let stats = if let Some(username) = username {
-        // Fetch stats from GitHub API
-        match fetch_github_stats(&username) {
+        match fetch_github_stats(&username).await {
             Ok(stats) => stats,
             Err(e) => {
                 eprintln!("Error fetching GitHub stats: {}", e);

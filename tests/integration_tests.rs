@@ -1,18 +1,14 @@
 use regex::Regex;
+use githubchart_rust::{fetch_github_stats, Chart, COLOR_SCHEMES};
 
-use githubchart::{fetch_github_stats, Chart, COLOR_SCHEMES};
-
-#[test]
-fn test_github_stats_fetching() {
-    // Note: This test requires internet connection
-    match fetch_github_stats("frytg") {
+#[tokio::test]
+async fn test_github_stats_fetching() {
+    match fetch_github_stats("frytg").await {
         Ok(stats) => {
             assert!(!stats.is_empty());
-            // Check date format
             assert!(Regex::new(r"^\d{4}-\d{2}-\d{2}$")
                 .unwrap()
                 .is_match(&stats[0].0));
-            // Check contribution count is non-negative
             assert!(stats[0].1 >= 0);
         }
         Err(e) => panic!("Failed to fetch stats: {}", e),
