@@ -1,5 +1,5 @@
-use regex::Regex;
 use githubchart_rust::{fetch_github_stats, Chart, COLOR_SCHEMES};
+use regex::Regex;
 
 #[tokio::test]
 async fn test_github_stats_fetching() {

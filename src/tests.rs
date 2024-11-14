@@ -55,7 +55,7 @@ mod tests {
         assert_eq!(COLOR_SCHEMES[0].1.len(), 5);
 
         // Test old scheme
-        assert_eq!(COLOR_SCHEMES[1].0, "old");
+        assert_eq!(COLOR_SCHEMES[1].0, "dark");
         assert_eq!(COLOR_SCHEMES[1].1.len(), 5);
 
         // Test halloween scheme

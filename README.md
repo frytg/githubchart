@@ -27,7 +27,7 @@ Use `cargo fmt` to format the code and `cargo test` to run the tests.
 Alternatively, you can download a release binary from the [releases page](https://github.com/frytg/githubchart-rust/releases) and run it directly:
 
 ```sh
-./githubchart output.svg -u frytg
+./githubchart-rust output.svg -u frytg
 ```
 
 ## Build
@@ -43,7 +43,7 @@ cargo build --release
 Test the binary with:
 
 ```sh
-./target/release/githubchart release.svg -u frytg
+./target/release/githubchart-rust release.svg -u frytg
 ```
 
 ## Build for Web

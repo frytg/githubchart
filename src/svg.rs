@@ -42,11 +42,11 @@ struct Point {
 fn svg_add_points(grid: &[Vec<Point>], svg: &mut String, colors: &[&str]) {
     for (x, row) in grid.iter().enumerate() {
         for (y, point) in row.iter().enumerate() {
-            if point.score == -1 {
+            if point.score == -1 || !point.date.contains("-") {
                 continue;
             }
             svg.push_str(&format!(
-                r#"<rect x="{}" y="{}" width="10" height="10" style="fill:{};" data-score="{}" data-date="{}"/>"#,
+                r#"<rect x="{}" y="{}" rx="2" ry="2" width="10" height="10" style="fill:{};" data-score="{}" data-date="{}" />"#,
                 (x * CUBE_SIZE) + X_PAD,
                 (y * CUBE_SIZE) + Y_PAD,
                 point_color(point.score, colors),
@@ -105,9 +105,9 @@ fn svg_add_months(svg: &mut String, stats: &[(String, i32)]) {
 fn point_color<'a>(score: i32, colors: &'a [&str]) -> &'a str {
     let index = match score {
         0 => 0,
-        1..=3 => 1,
-        4..=6 => 2,
-        7..=9 => 3,
+        1 => 1,
+        2 => 2,
+        3 => 3,
         _ => 4,
     };
     colors.get(index).unwrap_or(&colors[0])

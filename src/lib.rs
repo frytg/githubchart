@@ -26,11 +26,11 @@ impl Chart {
 pub const COLOR_SCHEMES: &[(&str, &[&str])] = &[
     (
         "default",
-        &["#eeeeee", "#c6e48b", "#7bc96f", "#239a3b", "#196127"],
+        &["#F0F3F8", "#9CE2A8", "#39C651", "#339944", "#20602A"],
     ),
     (
-        "old",
-        &["#eeeeee", "#d6e685", "#8cc665", "#44a340", "#1e6823"],
+        "dark",
+        &["#191C1F", "#0A431D", "#0D5926", "#1AB34D", "#2BE168"],
     ),
     (
         "halloween",
@@ -89,11 +89,14 @@ pub async fn fetch_github_stats(
 mod tests;
 
 #[wasm_bindgen]
-pub async fn generate_github_chart(username: &str, color_scheme: Option<String>) -> Result<String, JsValue> {
+pub async fn generate_github_chart(
+    username: &str,
+    color_scheme: Option<String>,
+) -> Result<String, JsValue> {
     let stats = fetch_github_stats(username)
         .await
         .map_err(|e| JsValue::from_str(&e.to_string()))?;
-    
+
     let colors = match color_scheme.as_deref() {
         Some(scheme) => COLOR_SCHEMES
             .iter()
